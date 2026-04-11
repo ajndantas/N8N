@@ -7,6 +7,6 @@ database**
 node_modules/
 **/workflows
 **/config
-**dados.sqlite
+**.sqlite
 **.log
 **crash**

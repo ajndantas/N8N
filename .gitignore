@@ -9,3 +9,6 @@
 **.exe
 **.dll
 **.gsheet
+**/docs
+database**
+node_modules/

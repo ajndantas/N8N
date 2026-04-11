@@ -1,11 +1,4 @@
-**.env
-**.bat
 **/desktop.ini
-**.ps1
-**.cfg
-**/Lib
-**/share
-**/Include
 **.exe
 **.dll
 **.gsheet
@@ -13,3 +6,7 @@
 database**
 node_modules/
 **/workflows
+**/config
+**dados.sqlite
+**.log
+**crash**

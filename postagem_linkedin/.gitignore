@@ -1,0 +1,9 @@
+**/desktop.ini
+**.exe
+**.dll
+**.gsheet
+**/Lib
+**/Include
+**.bat
+**.ps1
+**.cfg

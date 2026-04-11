@@ -1,0 +1,51 @@
+#version: '3.8'
+# 
+#USANDO O BD SQLite
+
+#
+# OS SCRIPTS PYTHON ESTÃO NO SERVIÇO PYTHON_RUNNER
+services:
+  n8n:
+    #build: .
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: n8n
+    volumes:
+      - /home/antonio_dantas/n8n_data:/home/node/.n8n
+    environment:
+      - GENERIC_TIMEZONE=America/Sao_Paulo
+      - N8N_HOST=antoniodantasn8n.ddns.net
+      - N8N_PROTOCOL=https
+      - N8N_TRUST_PROXY=true # NGINX ATRAS DO GCP.
+      - WEBHOOK_URL=https://antoniodantasn8n.ddns.net # CONFIGURADO NO NOIP
+    command: start
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always 
+    ports:
+      - "80:80" # LIBERAR NO FIREWALL DA GCP
+      - "443:443" # LIBERAR  NO FIREWALL DA GCP
+    volumes:
+      - /home/antonio_dantas/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /home/antonio_dantas/nginx/certbot/conf:/etc/letsencrypt
+      - /home/antonio_dantas/nginx/certbot/www:/var/www/certbot
+    environment:
+      - TZ=America/Sao_Paulo
+
+    depends_on:
+      - n8n
+
+  # INSTALAR NO N8N O NODE EXECUTE COMMAND PARA EXECUTAR SCRIPTS PYTHON
+  # docker exec python_runner python script1.py
+  #
+  python_runner: # FORMA RECOMENDADA DE EXECUTAR O PYTHON COMO EXTERNO
+    image: python:3.13-slim
+    container_name: python_runner
+    working_dir: /app # O CONTAINER JÁ INICIA NESSE DIRETÓRIO. NÃO PRECISA PASSAR ELE QUANDO FOR EXECUTAR O SCRIPT
+    command: tail -f /dev/null # PARA A IMAGEM NÃO TERMINAR, JÁ QUE O COMANDO PADRÃO DELA PYTHON3, FAZ ISSO 
+    restart: always 
+    volumes:
+      - /home/antonio_dantas/n8n_data/python_scripts:/app
+

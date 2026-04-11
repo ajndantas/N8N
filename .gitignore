@@ -1,0 +1,10 @@
+**.env
+**.bat
+**/desktop.ini
+**.ps1
+**.cfg
+**/Lib
+**/share
+**/Include
+**.exe
+**.dll

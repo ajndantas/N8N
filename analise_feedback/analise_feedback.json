@@ -1,0 +1,146 @@
+[
+  {
+    "JSON": [
+      {
+        "Data": "01/08/2025",
+        "Cliente": "Ana Souza",
+        "Feedback": "Meu aplicativo travou várias vezes.",
+        "Sentimento": "Insatisfeito",
+        "Sugestão de Melhoria": "Investigar travamentos do aplicativo e melhorar a estabilidade (logs e correções)."
+      },
+      {
+        "Data": "02/08/2025",
+        "Cliente": "João Ribeiro",
+        "Feedback": "Adorei a agilidade do atendimento.",
+        "Sentimento": "Satisfeito",
+        "Sugestão de Melhoria": ""
+      },
+      {
+        "Data": "03/08/2025",
+        "Cliente": "Carla Mendes",
+        "Feedback": "Recebi informações incorretas.",
+        "Sentimento": "Insatisfeito",
+        "Sugestão de Melhoria": "Reforçar clareza das informações fornecidas ao cliente e revisar treinamentos."
+      },
+      {
+        "Data": "04/08/2025",
+        "Cliente": "Pedro Nunes",
+        "Feedback": "Atendimento foi rápido e eficiente.",
+        "Sentimento": "Satisfeito",
+        "Sugestão de Melhoria": ""
+      },
+      {
+        "Data": "05/08/2025",
+        "Cliente": "Lucas Pereira",
+        "Feedback": "O tempo de espera foi muito longo.",
+        "Sentimento": "Insatisfeito",
+        "Sugestão de Melhoria": "Reduzir tempo de espera, otimizar fila e melhorar comunicação sobre o status."
+      },
+      {
+        "Data": "06/08/2025",
+        "Cliente": "Mariana Alves",
+        "Feedback": "Tentei contato e ninguém respondeu.",
+        "Sentimento": "Insatisfeito",
+        "Sugestão de Melhoria": "Aumentar disponibilidade de contato, responder mais rapidamente, otimizar SLA."
+      },
+      {
+        "Data": "07/08/2025",
+        "Cliente": "Rafael Costa",
+        "Feedback": "O suporte técnico não resolveu meu problema.",
+        "Sentimento": "Insatisfeito",
+        "Sugestão de Melhoria": "Melhorar resolução no first contact e encaminhamento adequado."
+      },
+      {
+        "Data": "08/08/2025",
+        "Cliente": "Fernanda Lima",
+        "Feedback": "Recebi informações incorretas.",
+        "Sentimento": "Insatisfeito",
+        "Sugestão de Melhoria": "Reforçar precisão das informações, validar dados e treinar equipe."
+      },
+      {
+        "Data": "09/08/2025",
+        "Cliente": "Bruno Rocha",
+        "Feedback": "O novo aplicativo está ótimo!",
+        "Sentimento": "Satisfeito",
+        "Sugestão de Melhoria": ""
+      },
+      {
+        "Data": "10/08/2025",
+        "Cliente": "Luiza Martins",
+        "Feedback": "Excelente experiência, recomendo!",
+        "Sentimento": "Satisfeito",
+        "Sugestão de Melhoria": ""
+      },
+      {
+        "Data": "11/08/2025",
+        "Cliente": "Tiago Silva",
+        "Feedback": "Adorei a agilidade do atendimento.",
+        "Sentimento": "Satisfeito",
+        "Sugestão de Melhoria": ""
+      },
+      {
+        "Data": "12/08/2025",
+        "Cliente": "Patrícia Gomes",
+        "Feedback": "A FlexData resolveu meu problema no mesmo dia!",
+        "Sentimento": "Satisfeito",
+        "Sugestão de Melhoria": ""
+      },
+      {
+        "Data": "13/08/2025",
+        "Cliente": "Diego Santos",
+        "Feedback": "Tudo funcionou perfeitamente.",
+        "Sentimento": "Satisfeito",
+        "Sugestão de Melhoria": ""
+      },
+      {
+        "Data": "14/08/2025",
+        "Cliente": "Clara Ferreira",
+        "Feedback": "O suporte técnico não resolveu meu problema.",
+        "Sentimento": "Insatisfeito",
+        "Sugestão de Melhoria": "Investigar o problema relatado e melhorar a resolução; treinamento adicional para suporte técnico."
+      },
+      {
+        "Data": "15/08/2025",
+        "Cliente": "Eduardo Lopes",
+        "Feedback": "A FlexData resolveu meu problema no mesmo dia!",
+        "Sentimento": "Satisfeito",
+        "Sugestão de Melhoria": ""
+      },
+      {
+        "Data": "16/08/2025",
+        "Cliente": "Juliana Ramos",
+        "Feedback": "Não consegui emitir a segunda via da fatura.",
+        "Sentimento": "Insatisfeito",
+        "Sugestão de Melhoria": "Facilitar a emissão da segunda via da fatura com instruções claras e passo a passo."
+      },
+      {
+        "Data": "17/08/2025",
+        "Cliente": "Felipe Teixeira",
+        "Feedback": "O novo aplicativo está ótimo!",
+        "Sentimento": "Satisfeito",
+        "Sugestão de Melhoria": ""
+      },
+      {
+        "Data": "18/08/2025",
+        "Cliente": "Amanda Duarte",
+        "Feedback": "Excelente experiência, recomendo!",
+        "Sentimento": "Satisfeito",
+        "Sugestão de Melhoria": ""
+      },
+      {
+        "Data": "19/08/2025",
+        "Cliente": "Marcelo Torres",
+        "Feedback": "Tentei contato e ninguém respondeu.",
+        "Sentimento": "Insatisfeito",
+        "Sugestão de Melhoria": "Melhorar tempo de resposta, SLA, canais de contato."
+      },
+      {
+        "Data": "20/08/2025",
+        "Cliente": "Beatriz Moreira",
+        "Feedback": "O atendimento deixou a desejar.",
+        "Sentimento": "Insatisfeito",
+        "Sugestão de Melhoria": "Treinamento de atendimento e melhoria da qualidade do serviço."
+      }
+    ]
+  }
+]

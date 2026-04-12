@@ -4,15 +4,6 @@ import ast
 
 class Urls_Array:
 
-    # data = [
-    #             {
-    #                 "url": "https://businessweek.com.br/2026/04/03/inteligencia-artificial-reposiciona-rh-e-amplia-o-papel-humano-na-tomada-de-decisao/",
-    #                 "id": 1,
-    #                 "createdAt": "2026-04-10T18:25:54.525Z",
-    #                 "updatedAt": "2026-04-10T18:25:54.525Z"
-    #             }
-    #       ]
-
     def convert_to_json(self, array):
          
         print("\nArray recebido: \n", array)

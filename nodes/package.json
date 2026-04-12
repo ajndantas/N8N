@@ -1,0 +1,12 @@
+{
+  "name": "installed-nodes",
+  "private": true,
+  "dependencies": {
+    "n8n-nodes-tavily": "0.1.5",
+    "n8n-nodes-tesseractjs": "1.5.1",
+    "n8n-nodes-pdf-api-hub": "4.0.20",
+    "n8n-nodes-execute-command-plus": "1.0.0",
+    "n8n-nodes-docx-to-md": "0.2.1",
+    "@tavily/n8n-nodes-tavily": "0.5.1"
+  }
+}

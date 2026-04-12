@@ -30,7 +30,7 @@ class Urls_Array:
 
     def __init__(self, array):
         
-        json_valido_array = self.convert_to_json(array)      
+        json_valido_array = self.convert_to_json(array) # Converte a string de array recebido para JSON válido      
 
         # converte JSON para lista de dicionários Python
         self.array = json.loads(json_valido_array)        
@@ -57,15 +57,6 @@ class Urls_Array:
 
 if __name__ == "__main__":
     
-    # data = """[
-    #              {
-    #                  "url": "https://businessweek.com.br/2026/04/03/inteligencia-artificial-reposiciona-rh-e-amplia-o-papel-humano-na-tomada-de-decisao/",
-    #                  "id": 1,
-    #                  "createdAt": "2026-04-10T18:25:54.525Z",
-    #                  "updatedAt": "2026-04-10T18:25:54.525Z"
-    #              }
-    #         ]"""
-
     try:
         if len(argv) < 2:
             raise ValueError("Nenhum array recebido. Por favor, forneça um array JSON como argumento.")

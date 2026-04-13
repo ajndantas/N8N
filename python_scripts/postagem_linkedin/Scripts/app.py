@@ -8,7 +8,7 @@ import subprocess
 # Você pode usar uma ferramenta como curl ou Postman para enviar uma solicitação POST para o endpoint "/urls" com um corpo de dados contendo o array de URLs.
 # 
 # Exemplo usando curl:
-# curl -X POST "http://localhost:8000/urls" -H "Content-Type: application/json" -d "{\"urls\": [\"http://example.com\", \"http://example.org\"]}"
+# curl -X POST "https://antoniodantasn8n.ddns.net/urls" -H "Content-Type: application/json" -d "{\"urls\": [\"http://example.com\", \"http://example.org\"]}"
 
 app = FastAPI()
 

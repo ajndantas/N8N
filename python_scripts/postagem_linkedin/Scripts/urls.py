@@ -1,10 +1,7 @@
 from sys import argv
-from fastapi import FastAPI
 import json
 import ast
 
-
-app = FastAPI()
 
 class Urls_Array:
 
@@ -51,15 +48,16 @@ class Urls_Array:
         print(self.urls)
 
 
-@app.get("/")
-def main():
+if __name__ == "__main__":
     
     try:
-        if len(argv) < 2:
-            raise ValueError("Nenhum array recebido. Por favor, forneça um array JSON como argumento.")
+        if len(argv) < 2: # Quantos args foram passados para o script? Se for menor que 2, 
+                          # significa que nenhum argumento foi fornecido (o primeiro argumento é sempre o nome do script)
+
+            raise ValueError("Nenhum argumento fornecido. Por favor, forneça um array de URLs como argumento.")
         
         else:
-            urls_array = Urls_Array(argv[1]) # urls_array = Urls_Array(data)
+            urls_array = Urls_Array(argv[1]) # Quem é argv[1] ? O argv[1] é o primeiro argumento passado para o script, que é o array de URLs.
 
             urls_array.get_urls()
             urls_array.print_urls()

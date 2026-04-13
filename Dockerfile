@@ -4,8 +4,9 @@ FROM python:3.11-slim
 WORKDIR /app 
 
 RUN pip install --no-cache-dir fastapi uvicorn
-RUN tail -f /dev/null
+
 
 # Ele está iniciando o servidor Uvicorn para rodar a aplicação FastAPI definida em app.py, 
 # ouvindo em todas as interfaces de rede
-CMD ["uvicorn", "postagem_linkedin.Scripts.app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD uvicorn "postagem_linkedin.Scripts.app:app" --host "0.0.0.0" --port "8000"
+

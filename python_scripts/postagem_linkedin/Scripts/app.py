@@ -3,6 +3,12 @@ import subprocess
 
 
 # Este script é um aplicativo FastAPI que expõe um endpoint POST em "/urls".
+#
+# Como chamar a API ? 
+# Você pode usar uma ferramenta como curl ou Postman para enviar uma solicitação POST para o endpoint "/urls" com um corpo de dados contendo o array de URLs.
+# 
+# Exemplo usando curl:
+# curl -X POST "http://localhost:8000/urls" -H "Content-Type: application/json" -d "{\"urls\": [\"http://example.com\", \"http://example.org\"]}"
 
 app = FastAPI()
 

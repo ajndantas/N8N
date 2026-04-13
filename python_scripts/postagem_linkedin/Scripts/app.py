@@ -14,7 +14,7 @@ import subprocess
 app = FastAPI()
 
 class Input(BaseModel):
-    data: str
+    data: list
 
 @app.post("/urls")
 def run_script(input: Input):

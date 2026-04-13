@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 import subprocess
 
 
@@ -12,10 +13,13 @@ import subprocess
 
 app = FastAPI()
 
+class Input(BaseModel):
+    data: str
+
 @app.post("/urls")
-def run_script(data: str):
+def run_script(input: Input):
     result = subprocess.run(
-        ["python", "urls.py", data],
+        ["python", "urls.py", input],
         capture_output=True,
         text=True # Adiciona esta linha para capturar a saída como texto em vez de bytes
     )

@@ -5,7 +5,8 @@ WORKDIR /app
 
 RUN pip install --no-cache-dir fastapi uvicorn
 
-COPY ./Scripts/urls.py .
-COPY ./Scripts/app.py .
+
+COPY ./python_scripts/postagem_linkedin/Scripts/app.py .
+COPY ./python_scripts/postagem_linkedin/Scripts/urls.py .
 
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

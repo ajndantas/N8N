@@ -17,6 +17,7 @@ RUN apk upgrade
 # INSTALANDO SQLITE
 RUN apk add --no-cache vim sqlite bash
 
+# OUTROS ITENS
 RUN ln -sf /usr/bin/vim /usr/bin/vi
 
 

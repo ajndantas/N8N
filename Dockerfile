@@ -5,8 +5,8 @@ WORKDIR /app
 
 RUN pip install --no-cache-dir fastapi uvicorn
 
-COPY ./postagem_linkedin/Scripts/app.py .
-COPY ./postagem_linkedin/Scripts/urls.py .
+COPY python_scripts/postagem_linkedin/Scripts/app.py .
+COPY python_scripts/postagem_linkedin/Scripts/urls.py .
 
 # Ele está iniciando o servidor Uvicorn para rodar a aplicação FastAPI definida em app.py, 
 # ouvindo em todas as interfaces de rede

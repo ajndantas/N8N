@@ -1,32 +1,14 @@
 from sys import argv
 import json
-import ast
 
 
 class Urls_Array:
 
     
-    def convert_to_json(self, array:str) -> str:
-         
-        print("\nArray recebido: \n", array)
-
-        # converte string para dict Python
-        dados = ast.literal_eval(array)
-
-        # converte dict para JSON válido
-        self.json_valido_array = json.dumps(dados)
+    def __init__(self, array:list):
         
-        print("\nJSON válido: \n", self.json_valido_array)
-
-        return self.json_valido_array
-    
-    
-    def __init__(self, array:str):
-        
-        json_valido_array = self.convert_to_json(array) # Converte a string de array recebido para JSON válido      
-
         # converte JSON para lista de dicionários Python
-        self.array = json.loads(json_valido_array)        
+        self.array = json.loads(array)        
 
         self.urls = []
 

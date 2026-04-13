@@ -1,10 +1,15 @@
 from sys import argv
+from fastapi import FastAPI
 import json
 import ast
 
+
+app = FastAPI()
+
 class Urls_Array:
 
-    def convert_to_json(self, array):
+    
+    def convert_to_json(self, array:str) -> str:
          
         print("\nArray recebido: \n", array)
 
@@ -18,8 +23,8 @@ class Urls_Array:
 
         return self.json_valido_array
     
-
-    def __init__(self, array):
+    
+    def __init__(self, array:str):
         
         json_valido_array = self.convert_to_json(array) # Converte a string de array recebido para JSON válido      
 
@@ -39,14 +44,15 @@ class Urls_Array:
 
             self.i += 1
 
-    def add_url(self, url):
+    def add_url(self, url:str):
         self.urls.append(url)
 
-    def print_urls(self):
+    def print_urls(self) -> str:
         print(self.urls)
 
 
-if __name__ == "__main__":
+@app.get("/")
+def main():
     
     try:
         if len(argv) < 2:

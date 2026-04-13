@@ -41,11 +41,10 @@ services:
   # docker exec python_runner python script1.py
   #
   python_runner: # FORMA RECOMENDADA DE EXECUTAR O PYTHON COMO EXTERNO
-    image: python:3.13-slim
+    build: . #image: python:3.13-slim
     container_name: python_runner
-    working_dir: /app # O CONTAINER JÁ INICIA NESSE DIRETÓRIO. NÃO PRECISA PASSAR ELE QUANDO FOR EXECUTAR O SCRIPT
+    #working_dir: /app # O CONTAINER JÁ INICIA NESSE DIRETÓRIO. NÃO PRECISA PASSAR ELE QUANDO FOR EXECUTAR O SCRIPT
     command: tail -f /dev/null # PARA A IMAGEM NÃO TERMINAR, JÁ QUE O COMANDO PADRÃO DELA PYTHON3, FAZ ISSO 
     restart: always 
     volumes:
       - /home/antonio_dantas/n8n_data/python_scripts:/app
-

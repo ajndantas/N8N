@@ -15,7 +15,7 @@ from typing import List
 app = FastAPI()
 
 class Input(BaseModel):
-    data: List[str] 
+    data: List[dict] 
 
 @app.post("/urls")
 def run_script(input: Input):

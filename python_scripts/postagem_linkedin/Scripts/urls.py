@@ -14,7 +14,7 @@ class Urls_Array:
         
         # TRANSFORMAÇÃO DA STRING PARA O FORMATO JSON VÁLIDO
         raw = sub(r'(?<=[{,])\s*(\w+)\s*:', r'"\1":', raw)   # Coloca aspas nas chaves
-        raw = sub(r':\s*([^",\}\]]+)', r': "\1"', raw)         # Coloca aspas nos valores
+        raw = sub(r':\s*([^",\}\]]+)', r': "\1"', raw)       # Coloca aspas nos valores
         
         self.array = json.loads(raw) # Converte a string JSON em um objeto Python
 

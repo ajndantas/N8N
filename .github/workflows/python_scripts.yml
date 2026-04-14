@@ -22,15 +22,15 @@ jobs:
 
             echo "Atualizando código"
             git pull # PARA QUE ISSO FUNCIONE, SEM QUESTIONAMENTOS, O REPOSITÓRIO PRECISA
-                     # ESTAR CONFIGURADO COM git config pull.rebase false . Garante merge padrão em vez de rebase 
+                     # ESTAR CONFIGURADO COM git config pull.rebase false. GARANTE MERGE PADRÃO EM VEZ DE REBASE 
 
-            echo "Parando container"
-            docker compose down python_runner
+            # echo "Parando container"
+            # docker compose down python_runner
 
-            echo "Removendo imagem antiga"
-            docker image rm -f n8n_data-python_runner || true
+            # echo "Removendo imagem antiga"
+            # docker image rm -f n8n_data-python_runner || true
 
-            echo "Subindo container atualizado"
-            docker compose up -d python_runner
+            # echo "Subindo container atualizado"
+            # docker compose up -d python_runner
 
             echo "Deploy finalizado com sucesso"

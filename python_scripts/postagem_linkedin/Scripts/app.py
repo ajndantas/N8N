@@ -20,7 +20,7 @@ class Input(BaseModel):
 @app.post("/urls")
 def run_script(input: Input):
     result = subprocess.run(
-        ["python", "urls.py", str(input.data)], # O script "urls.py" deve estar no mesmo diretório que este arquivo "app.py"
+        ["python", "postagem_linkedin/Scripts/urls.py", str(input.data)], # O script "urls.py" deve estar no mesmo diretório que este arquivo "app.py"
         
         capture_output=True,
         text=True # Adiciona esta linha para capturar a saída como texto em vez de bytes

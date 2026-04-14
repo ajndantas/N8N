@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 import subprocess
 
+from pydantic import BaseModel
+from typing import List
 
 # Este script é um aplicativo FastAPI que expõe um endpoint POST em "/urls".
 #
@@ -12,8 +14,11 @@ import subprocess
 
 app = FastAPI()
 
+class Input(BaseModel):
+    urls: List[str]
+
 @app.post("/urls")
-def run_script(input: str):
+def run_script(input: Input):
     result = subprocess.run(
         ["python", "urls.py", input], # O script "urls.py" deve estar no mesmo diretório que este arquivo "app.py"
         capture_output=True,

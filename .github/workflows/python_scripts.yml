@@ -21,7 +21,8 @@ jobs:
             cd ~/n8n_data
 
             echo "Atualizando código"
-            git pull
+            git pull # PARA QUE ISSO FUNCIONE, SEM QUESTIONAMENTOS, O REPOSITÓRIO PRECISA
+                     # ESTAR CONFIGURADO COM git config pull.rebase false . Garante merge padrão em vez de rebase 
 
             echo "Parando container"
             docker compose down python_runner

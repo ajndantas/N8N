@@ -11,12 +11,14 @@ class Urls_Array:
         self.i = 1
         
         raw = " ".join(array) # Concatena os elementos do array em uma única string
+        
+        # TRANSFORMAÇÃO DA STRING PARA O FORMATO JSON VÁLIDO
         raw = sub(r'(?<=[{,])\s*(\w+)\s*:', r'"\1":', raw)   # Coloca aspas nas chaves
         raw = sub(r':\s*([^",\}\]]+)', r': "\1"', raw)         # Coloca aspas nos valores
         
         self.array = json.loads(raw) # Converte a string JSON em um objeto Python
 
-        print("Array tratado: ", self.array)
+        print("Array tratado para python: ", self.array, "Tipo do array tratado: ", type(self.array)) # Tipo do array tratado:  <class 'list'>
         
         self.urls = []
 
@@ -25,7 +27,7 @@ class Urls_Array:
 
         for item in self.array:
                         
-            print(f"Item {self.i}: ", item)
+            print(f"Item {self.i}: ", item, "Tipo do item: ", type(item)) # Tipo do item:  <class 'dict'>, Item 1:  {'url': 'http://example.com'}
 
             self.add_url(item["url"])
 

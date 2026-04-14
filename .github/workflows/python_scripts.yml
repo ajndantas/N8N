@@ -1,0 +1,35 @@
+name: Deploy na VM (GCP)
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Executar comandos via SSH na VM
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.GCP_VM_HOST }}
+          username: ${{ secrets.GCP_VM_USER }}
+          key: ${{ secrets.GCP_SSH_KEY }}
+          script: |
+            echo "Entrando no diretório do projeto"
+            cd ~/n8n_data
+
+            echo "Atualizando código"
+            git pull
+
+            echo "Parando container"
+            docker compose down python_runner
+
+            echo "Removendo imagem antiga"
+            docker image rm -f n8n_data-python_runner || true
+
+            echo "Subindo container atualizado"
+            docker compose up -d python_runner
+
+            echo "Deploy finalizado com sucesso"

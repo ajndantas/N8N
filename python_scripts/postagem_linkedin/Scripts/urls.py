@@ -10,11 +10,9 @@ class Urls_Array:
         
         self.i = 1
         
-        raw = " ".join(array) # Concatena os elementos do array em uma única string
-        
         self.array = json.loads(array) # Converte a string JSON em um objeto Python
 
-        print("Array tratado para python: ", self.array, "Tipo do array tratado: ", type(self.array))
+        #print("Array tratado para python: ", self.array, "Tipo do array tratado: ", type(self.array))
         
         self.urls = []
 
@@ -23,7 +21,7 @@ class Urls_Array:
 
         for item in self.array:
                         
-            print(f"\nItem {self.i}: ", item, "Tipo do item: ", type(item),"\n")
+            #print(f"\nItem {self.i}: ", item, "Tipo do item: ", type(item),"\n")
 
             self.add_url(item["url"])
 

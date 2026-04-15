@@ -5,6 +5,9 @@ on:
     branches:
       - main 
 
+environment:
+  - API_KEY : ${{ secrets.API_KEY }} # DEFINA SUA API KEY AQUI, ELA VAI SER USADA PARA AUTENTICAR AS REQUISIÇÕES AO SERVIÇO PYTHON
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest

@@ -3,7 +3,6 @@ FROM python:3.11-slim
 # Defina variáveis de ambiente para evitar prompts interativos durante a instalação e para garantir que a saída do Python seja exibida imediatamente no console
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
-ENV API_KEY="&2Tm[9iB8m9Z"
 
 # O CONTAINER JÁ INICIA NESSE DIRETÓRIO. NÃO PRECISA PASSAR ELE QUANDO FOR EXECUTAR O SCRIPT
 WORKDIR /app 

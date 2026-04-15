@@ -27,9 +27,8 @@ class Urls_Array:
 
             self.add_url(item["url"])
 
-            self.i += 1
+            self.i += 1       
         
-        print("\nURLs extraídas do array: ", self.urls)
 
         return self.urls
 
@@ -47,7 +46,7 @@ if __name__ == "__main__":
         else:
             urls_array = Urls_Array(argv[1])
 
-            urls_array.get_urls()
+            print(urls_array.get_urls())
 
     except ValueError as e:
         print(e)

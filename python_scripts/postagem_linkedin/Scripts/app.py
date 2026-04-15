@@ -1,13 +1,10 @@
+import json
 from os import getenv
-
 from dotenv import load_dotenv
-
 from fastapi import FastAPI
 import subprocess
-
 from pydantic import BaseModel
 from typing import List
-
 from fastapi import Header, HTTPException, Depends
 
 # Este script é um aplicativo FastAPI que expõe um endpoint POST em "/urls".
@@ -34,8 +31,12 @@ def verify_api_key(x_api_key: str = Header(...)):
 
 @app.post("/urls")
 def run_script(input: Input, api_key: str = Depends(verify_api_key)):
+
+    # Converte o objeto pydantic para JSON string
+    json_data = json.dumps(input.data)
+
     result = subprocess.run(
-        ["python", "postagem_linkedin/Scripts/urls.py", str(input.data)], # O script "urls.py" deve estar no mesmo diretório que este arquivo "app.py"
+        ["python", "postagem_linkedin/Scripts/urls.py", json_data], # O script "urls.py" deve estar no mesmo diretório que este arquivo "app.py"
         
         capture_output=True,
         text=True # Adiciona esta linha para capturar a saída como texto em vez de bytes

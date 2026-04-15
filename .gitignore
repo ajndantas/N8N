@@ -10,7 +10,7 @@
 **.dll
 **database**
 **/node_modules
-**/workflows
+**/storage/workflows
 **.gsheet
 **activate**
 config

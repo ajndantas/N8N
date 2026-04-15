@@ -10,7 +10,7 @@ class Urls_Array:
         
         self.i = 1
         
-        self.array = json.loads(array) # Converte a string JSON em um objeto Python
+        self.array = json.loads(array) # Converte a STRING JSON em um objeto Python
 
         #print("Array tratado para python: ", self.array, "Tipo do array tratado: ", type(self.array))
         

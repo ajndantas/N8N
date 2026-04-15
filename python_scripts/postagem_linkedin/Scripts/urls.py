@@ -23,19 +23,19 @@ class Urls_Array:
 
         for item in self.array:
                         
-            print(f"Item {self.i}: ", item, "Tipo do item: ", type(item))
+            print(f"\nItem {self.i}: ", item, "Tipo do item: ", type(item),"\n")
 
             self.add_url(item["url"])
 
             self.i += 1
+        
+        print("\nURLs extraídas do array: ", self.urls)
+
+        return self.urls
 
 
     def add_url(self, url:str):
-        self.urls.append(url)
-
-
-    def print_urls(self) -> str:
-        print(self.urls)
+        self.urls.append(url)        
 
 
 if __name__ == "__main__":

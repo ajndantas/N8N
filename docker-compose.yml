@@ -42,6 +42,8 @@ services:
   #
   python_runner: # FORMA RECOMENDADA DE EXECUTAR O PYTHON COMO EXTERNO
     build: . #image: python:3.13-slim
+    environment:
+      - API_KEY=${API_KEY} # DEFINA SUA API KEY AQUI, ELA VAI SER USADA PARA AUTENTICAR AS REQUISIÇÕES AO SERVIÇO PYTHON
     container_name: python_runner          
     #working_dir: /app # O CONTAINER JÁ INICIA NESSE DIRETÓRIO. NÃO PRECISA PASSAR ELE QUANDO FOR EXECUTAR O SCRIPT
     #command: tail -f /dev/null # PARA A IMAGEM NÃO TERMINAR, JÁ QUE O COMANDO PADRÃO DELA PYTHON3, FAZ ISSO 

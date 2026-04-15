@@ -19,10 +19,10 @@ jobs:
           host: ${{ secrets.GCP_VM_HOST }}
           username: ${{ secrets.GCP_VM_USER }}
           key: ${{ secrets.GCP_SSH_KEY }}
-          envs: API_KEY          
+          envs: API_KEY # EXPORTA A VARIÁVEL DE AMBIENTE PARA O COMANDO SSH         
           script: |
             # Exporte a variável para que o Docker Compose consiga visualizá-la
-            export API_KEY=$API_KEY
+            export API_KEY=$API_KEY 
 
             echo "Entrando no diretório do projeto"
             cd ~/n8n_data

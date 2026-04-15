@@ -44,7 +44,7 @@ services:
     build: . #image: python:3.13-slim
     container_name: python_runner
     environment:
-      - API_KEY=${{ secrets.API_KEY }} # DEFINA SUA API KEY AQUI, ELA VAI SER USADA PARA AUTENTICAR AS REQUISIÇÕES AO SERVIÇO PYTHON
+      - API_KEY=$${{ secrets.API_KEY }} # DEFINA SUA API KEY AQUI, ELA VAI SER USADA PARA AUTENTICAR AS REQUISIÇÕES AO SERVIÇO PYTHON
       
     #working_dir: /app # O CONTAINER JÁ INICIA NESSE DIRETÓRIO. NÃO PRECISA PASSAR ELE QUANDO FOR EXECUTAR O SCRIPT
     #command: tail -f /dev/null # PARA A IMAGEM NÃO TERMINAR, JÁ QUE O COMANDO PADRÃO DELA PYTHON3, FAZ ISSO 

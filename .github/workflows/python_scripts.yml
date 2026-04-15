@@ -1,4 +1,4 @@
-name: Deploy na VM (GCP)
+name: Deploy na VM GCP - container Python Runner
 
 on:
   push:

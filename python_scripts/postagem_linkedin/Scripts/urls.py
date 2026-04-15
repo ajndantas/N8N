@@ -45,7 +45,7 @@ if __name__ == "__main__":
             raise ValueError("Nenhum array recebido. Por favor, forneça um array JSON como argumento.")
         
         else:
-            urls_array = Urls_Array(argv[1:])
+            urls_array = Urls_Array(argv[1])
 
             urls_array.get_urls()
             urls_array.print_urls()

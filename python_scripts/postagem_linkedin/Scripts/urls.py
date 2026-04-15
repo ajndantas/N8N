@@ -48,7 +48,6 @@ if __name__ == "__main__":
             urls_array = Urls_Array(argv[1])
 
             urls_array.get_urls()
-            urls_array.print_urls()
 
     except ValueError as e:
         print(e)

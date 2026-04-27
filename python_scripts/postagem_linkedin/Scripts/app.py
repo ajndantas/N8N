@@ -25,6 +25,7 @@ class Input(BaseModel):
 
 # AUTENTICAÇÃO SIMPLES COM API KEY
 def verify_api_key(x_api_key: str = Header(...)):
+    print("Chave de API recebida: ", x_api_key) # Imprime a chave de API recebida para depuração
     if x_api_key != getenv("API_KEY"):
         raise HTTPException(status_code=401, detail="Unauthorized")
     

@@ -16,7 +16,7 @@ class Urls_Array:
         
         self.urls = []
 
-
+        
     def get_urls(self):
 
         for item in self.array:

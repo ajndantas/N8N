@@ -31,10 +31,11 @@ def verify_api_key(x_api_key: str = Header(...)):
     
 
 @app.post("/urls")
-def run_script(input: Input, api_key: str = Depends(verify_api_key)):
+def run_script(input: Input, api_key: str = Depends(verify_api_key)): 
 
     
-    json_data = json.dumps(input.data) # Converte o array de URLs em uma string JSON para passar como argumento para o script "urls.py" 
+    json_data = json.dumps(input) # Converte o array de URLs em uma string JSON para passar como argumento para o script "urls.py" 
+                                       # O data do input é uma lista de dicionários, e cada dicionário tem a chave "url" com o valor da URL.
 
     result = subprocess.run(
         ["python", "postagem_linkedin/Scripts/urls.py", json_data], # O script "urls.py" deve estar no mesmo diretório que este arquivo "app.py"

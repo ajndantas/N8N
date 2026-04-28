@@ -1,5 +1,4 @@
 from sys import argv
-from re import sub
 import json
 
 

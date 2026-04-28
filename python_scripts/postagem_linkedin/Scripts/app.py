@@ -34,7 +34,7 @@ def verify_api_key(x_api_key: str = Header(...)):
 def run_script(input: Input, api_key: str = Depends(verify_api_key)): 
 
     
-    json_data = json.dumps(input) # Converte o array de URLs em uma string JSON para passar como argumento para o script "urls.py" 
+    json_data = json.dumps(input.data) # Converte o array de URLs em uma string JSON para passar como argumento para o script "urls.py" 
                                   # O input é um objeto do tipo Input, que é uma classe Pydantic.
 
     result = subprocess.run(

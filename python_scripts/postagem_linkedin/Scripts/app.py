@@ -19,8 +19,8 @@ app = FastAPI()
 
 load_dotenv() # Carrega as variáveis de ambiente do arquivo .env
 
-#class Input(BaseModel):
-#    data: List[dict] 
+class Input(BaseModel):
+    data: List[dict] 
 
 
 # AUTENTICAÇÃO SIMPLES COM API KEY
@@ -31,11 +31,10 @@ def verify_api_key(x_api_key: str = Header(...)):
     
 
 @app.post("/urls")
-def run_script(input: str, api_key: str = Depends(verify_api_key)):
+def run_script(input: Input, api_key: str = Depends(verify_api_key)):
 
     
-    #json_data = json.dumps(input.data)
-    json_data = input
+    json_data = json.dumps(input.data) # Converte o array de URLs em uma string JSON para passar como argumento para o script "urls.py" 
 
     result = subprocess.run(
         ["python", "postagem_linkedin/Scripts/urls.py", json_data], # O script "urls.py" deve estar no mesmo diretório que este arquivo "app.py"

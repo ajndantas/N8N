@@ -29,7 +29,7 @@ def verify_api_key(x_api_key: str = Header(...)):
     api_key = x_api_key
 
     if x_api_key != getenv("API_KEY"):
-        raise HTTPException(status_code=401, detail=f"Unauthorized {api_key}")
+        raise HTTPException(status_code=401, detail=f"Unauthorized - API_key = {api_key}")
     
 
 @app.post("/urls")

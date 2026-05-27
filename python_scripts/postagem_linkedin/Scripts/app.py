@@ -41,7 +41,7 @@ def run_script(input: Input, api_key: str = Depends(verify_api_key)):
                                   # O input é um objeto do tipo Input, que é uma classe Pydantic.
 
     result = subprocess.run(
-        ["python", "postagem_linkedin/Scripts/urls.py", json_data], # O script "urls.py" deve estar no mesmo diretório que este arquivo "app.py"
+        ["python", "urls.py", json_data], # O script "urls.py" deve estar no mesmo diretório que este arquivo "app.py"
         
         capture_output=True,
         text=True # Adiciona esta linha para capturar a saída como texto em vez de bytes

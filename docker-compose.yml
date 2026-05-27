@@ -26,7 +26,7 @@ services:
     restart: always 
     ports:
       - "80:80" # LIBERAR NO FIREWALL DA GCP
-      - "443:443" # LIBERAR  NO FIREWALL DA GCP
+      - "443:443" # LIBERAR NO FIREWALL DA GCP
     volumes:
       - /home/antonio_dantas/nginx/nginx.conf:/etc/nginx/nginx.conf
       - /home/antonio_dantas/nginx/certbot/conf:/etc/letsencrypt
@@ -43,7 +43,7 @@ services:
   python_runner: # FORMA RECOMENDADA DE EXECUTAR O PYTHON COMO EXTERNO
     build: . #image: python:3.13-slim
     environment:
-      - API_KEY=${API_KEY} # DEFINA SUA API KEY AQUI, ELA VAI SER USADA PELO YAML DO GUTHUB ACTIONS NA PARTE DE COMANDOS
+      - API_KEY=${API_KEY} # DEFINA SUA API KEY AQUI, ELA VAI SER USADA PELO YAML DO GITHUB ACTIONS NA PARTE DE COMANDOS
     container_name: python_runner          
     #working_dir: /app # O CONTAINER JÁ INICIA NESSE DIRETÓRIO. NÃO PRECISA PASSAR ELE QUANDO FOR EXECUTAR O SCRIPT
     #command: tail -f /dev/null # PARA A IMAGEM NÃO TERMINAR, JÁ QUE O COMANDO PADRÃO DELA PYTHON3, FAZ ISSO 

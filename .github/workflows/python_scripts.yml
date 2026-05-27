@@ -1,43 +1,74 @@
-name: Deploy na VM GCP - container Python Runner
+name: Docker Image & Cloud Run Deploy python_runner
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "master" ]
+    paths: 
+      - 'python_scripts/**'        
 
 env:
+  PROJECT_ID: n8n-meus-ensinamentos   # Substitua pelo ID do seu projeto no GCP
+  PORT: 8080                          # Porta onde a aplicação vai rodar dentro do container. 
+                                      # que é a porta padrão de entrada do Cloud Run. 
+  REGION: us-central1                 # Região do GCP (ex: São Paulo ou us-central1)
+  SERVICE_NAME: python-runner         # Nome que o serviço terá no Cloud Run
+  REPO_NAME: python-runner            # Nome do seu repositório no Artifact Registry. Deve ser criado previamente no GCP.
   API_KEY: ${{ secrets.API_KEY }} # DEFINA SUA API KEY AQUI, ELA VAI SER USADA PARA AUTENTICAR AS REQUISIÇÕES AO SERVIÇO PYTHON
-
+  
 jobs:
+
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
-      - name: Executar comandos via SSH na VM
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Autenticar no Google Cloud via Service Account
+      - name: Google Auth
+        id: auth
+        uses: google-github-actions/auth@v2
         with:
-          host: ${{ secrets.GCP_VM_HOST }}
-          username: ${{ secrets.GCP_VM_USER }}
-          key: ${{ secrets.GCP_SSH_KEY }}
-          envs: API_KEY # EXPORTA A VARIÁVEL DE AMBIENTE PARA O COMANDO SSH         
-          script: |
-            # Exporte a variável para que o Docker Compose consiga visualizá-la
-            export API_KEY=$API_KEY 
+          credentials_json: ${{ secrets.GCP_SA_KEY }} # Crie esse Secret no GitHub com o JSON da sua Service Account
 
-            echo "Entrando no diretório do projeto"
-            cd ~/n8n_data
+      # 2. Configurar o gcloud CLI no runner
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
 
-            echo "Atualizando código"
-            git pull # PARA QUE ISSO FUNCIONE, SEM QUESTIONAMENTOS, O REPOSITÓRIO PRECISA
-                     # ESTAR CONFIGURADO COM git config pull.rebase false. GARANTE MERGE PADRÃO EM VEZ DE REBASE 
+      # 3. Autenticar o Docker para conseguir dar Push no Artifact Registry do GCP
+      - name: Configure Docker for GCP
+        run: |
+          gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
 
-            echo "Parando container"
-            docker compose down python_runner
+      # 4. Build e Push da imagem Docker para o Artifact Registry do GCP
+      #
+      # NÃO EXECUTA MAIS COMANDOS NA MÁQUINA VIRTUAL, APENAS FAZ O BUILD E PUSH DA IMAGEM PARA O REGISTRY. 
+      - name: Build and Push the Docker image to Artifact Registry
+        run: |
+          # github.repository_owner = ajndantas
+          #IMAGE_ID=ghcr.io/${{ github.repository_owner }}/agente_chatbotseguro
+          #IMAGE_ID=agente_nfe
+          
+          # O padrão do Artifact Registry é: REGIAO-docker.pkg.dev/PROJECT_ID/REPO_NAME/IMAGE_NAME:TAG
+          IMAGE_ID="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}"
+          
+          #TAG=$(date +%Y%m%d%H%M%S)
+          TAG=latest
+          
+          docker build --build-arg API_KEY_OPENROUTER=$API_KEY_OPENROUTER --build-arg API_KEY=$API_KEY -t $IMAGE_ID:$TAG "Insurminds/Desafio 2/agente_chatbotseguro/Scripts/" # PEGA O DOCKERFILE AQUI
+          docker push $IMAGE_ID:$TAG 
 
-            echo "Removendo imagem antiga"
-            docker image rm -f n8n_data-python_runner || true
+      # 5. Deploy da imagem Docker para o Cloud Run
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --port=${{ env.PORT }} \
+            --image="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:latest" \
+            --region=${{ env.REGION }} \
+            --platform=managed \
+            --allow-unauthenticated \
+            --set-env-vars=API_KEY_OPENROUTER=$API_KEY_OPENROUTER,API_KEY=$API_KEY \
+            --memory=2Gi
 
-            echo "Subindo container atualizado"
-            docker compose up -d python_runner
-
-            echo "Deploy finalizado com sucesso"
+     
+      

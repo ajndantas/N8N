@@ -7,9 +7,14 @@ ENV PYTHONUNBUFFERED=1
 # O CONTAINER JÁ INICIA NESSE DIRETÓRIO. NÃO PRECISA PASSAR ELE QUANDO FOR EXECUTAR O SCRIPT
 WORKDIR /app 
 
+COPY app.py .
+COPY urls.py .
+
 RUN pip install --no-cache-dir fastapi uvicorn dotenv
+
+EXPOSE 8000
 
 # Ele está iniciando o servidor Uvicorn para rodar a aplicação FastAPI definida em app.py, 
 # ouvindo em todas as interfaces de rede
-CMD uvicorn "postagem_linkedin.Scripts.app:app" --host "0.0.0.0" --port "8000"
+CMD uvicorn "app:app" --host "0.0.0.0" --port "8000"
 

@@ -69,7 +69,5 @@ jobs:
             --allow-unauthenticated \
             --set-env-vars=API_KEY=$API_KEY
         
-        #--memory=2Gi
-
-     
+        #--memory=2Gi  
       

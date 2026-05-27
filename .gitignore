@@ -17,3 +17,7 @@ config
 **.pyc
 **.log
 **__pycache__
+**.sqlite
+**/nodes
+**.journal
+

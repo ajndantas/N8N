@@ -16,7 +16,8 @@ env:
   
   # N8N ENV VARIABLES
   GENERIC_TIMEZONE: America/Sao_Paulo
-  N8N_HOST: antoniodantasn8n.ddns.net
+  N8N_HOST: https://n8n-574973424283.us-central1.run.app
+  #N8N_HOST: antoniodantasn8n.ddns.net
   N8N_PROTOCOL: https
   WEBHOOK_URL: https://antoniodantasn8n.ddns.net # CONFIGURADO NO NOIP
   

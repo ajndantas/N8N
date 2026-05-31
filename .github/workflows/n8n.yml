@@ -19,7 +19,8 @@ env:
   N8N_HOST: https://n8n-574973424283.us-central1.run.app
   #N8N_HOST: antoniodantasn8n.ddns.net
   N8N_PROTOCOL: https
-  WEBHOOK_URL: https://antoniodantasn8n.ddns.net # CONFIGURADO NO NOIP
+  N8N_TRUST_PROXY: true 
+  WEBHOOK_URL: https://n8n-574973424283.us-central1.run.app # CONFIGURADO NO NOIP
   
   # DEFAULT N8N PORT
   N8N_PORT: 5678 
@@ -61,7 +62,7 @@ jobs:
           #TAG=$(date +%Y%m%d%H%M%S)
           TAG=latest
           
-          docker build --build-arg GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }} --build-arg N8N_HOST=${{ env.N8N_HOST }} --build-arg N8N_PROTOCOL=${{ env.N8N_PROTOCOL }} --build-arg WEBHOOK_URL=${{ env.WEBHOOK_URL }} --build-arg N8N_PORT=${{ env.N8N_PORT }} -t $IMAGE_ID:$TAG . # PEGA O DOCKERFILE AQUI
+          docker build --build-arg N8N_TRUST_PROXY={{ env.N8N_TRUST_PROXY }} --build-arg GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }} --build-arg N8N_HOST=${{ env.N8N_HOST }} --build-arg N8N_PROTOCOL=${{ env.N8N_PROTOCOL }} --build-arg WEBHOOK_URL=${{ env.WEBHOOK_URL }} --build-arg N8N_PORT=${{ env.N8N_PORT }} -t $IMAGE_ID:$TAG . # PEGA O DOCKERFILE AQUI
           docker push $IMAGE_ID:$TAG 
 
       # 5. Deploy da imagem Docker para o Cloud Run

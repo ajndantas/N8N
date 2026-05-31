@@ -1,0 +1,77 @@
+name: Docker Image & Cloud Run Deploy N8N
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: 
+      - '.github/workflows/n8n.yml'        
+
+env:
+  PROJECT_ID: n8n-meus-ensinamentos   # Substitua pelo ID do seu projeto no GCP
+  PORT: 5678                          # Porta onde a aplicação vai rodar dentro do container. 
+                                      # que é a porta padrão de entrada do Cloud Run. 
+  REGION: us-central1                 # Região do GCP (ex: São Paulo ou us-central1)
+  SERVICE_NAME: n8n                   # Nome que o serviço terá no Cloud Run
+  REPO_NAME: n8n                      # Nome do seu repositório no Artifact Registry. Deve ser criado previamente no GCP.
+  
+  # N8N ENV VARIABLES
+  GENERIC_TIMEZONE: America/Sao_Paulo
+  N8N_HOST: antoniodantasn8n.ddns.net
+  N8N_PROTOCOL: https
+  WEBHOOK_URL: https://antoniodantasn8n.ddns.net # CONFIGURADO NO NOIP
+  
+  # DEFAULT N8N PORT
+  N8N_PORT: 5678 
+    
+jobs:
+
+  deploy:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Autenticar no Google Cloud via Service Account
+      - name: Google Auth
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }} # Crie esse Secret no GitHub com o JSON da sua Service Account
+
+      # 2. Configurar o gcloud CLI no runner
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      # 3. Autenticar o Docker para conseguir dar Push no Artifact Registry do GCP
+      - name: Configure Docker for GCP
+        run: |
+          gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+      # 4. Build e Push da imagem Docker para o Artifact Registry do GCP
+      #
+      # NÃO EXECUTA MAIS COMANDOS NA MÁQUINA VIRTUAL, APENAS FAZ O BUILD E PUSH DA IMAGEM PARA O REGISTRY. 
+      - name: Build and Push the Docker image to Artifact Registry
+        run: |
+          
+          # O padrão do Artifact Registry é: REGIAO-docker.pkg.dev/PROJECT_ID/REPO_NAME/IMAGE_NAME:TAG
+          IMAGE_ID="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}"
+          
+          #TAG=$(date +%Y%m%d%H%M%S)
+          TAG=latest
+          
+          docker build --build-arg GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }} --build-arg N8N_HOST=${{ env.N8N_HOST }} --build-arg N8N_PROTOCOL=${{ env.N8N_PROTOCOL }} --build-arg WEBHOOK_URL=${{ env.WEBHOOK_URL }} --build-arg PORT=${{ env.PORT }} --build-arg N8N_HOST=${{ env.N8N_PORT }} -t $IMAGE_ID:$TAG . # PEGA O DOCKERFILE AQUI
+          docker push $IMAGE_ID:$TAG 
+
+      # 5. Deploy da imagem Docker para o Cloud Run
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --port=${{ env.PORT }} \
+            --image="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:latest" \
+            --region=${{ env.REGION }} \
+            --platform=managed \
+            --allow-unauthenticated \
+            --set-env-vars=GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }},N8N_HOST=${{ env.N8N_HOST }},N8N_PROTOCOL=${{ env.N8N_PROTOCOL }},WEBHOOK_URL=${{ env.WEBHOOK_URL }},PORT=${{ env.PORT }},N8N_HOST=${{ env.N8N_PORT }} \
+            --memory=2Gi  
+      

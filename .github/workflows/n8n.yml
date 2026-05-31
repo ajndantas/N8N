@@ -20,6 +20,7 @@ env:
   N8N_PROTOCOL: https
   #N8N_TRUST_PROXY: true 
   WEBHOOK_URL: https://n8n-574973424283.us-central1.run.app # CONFIGURADO NO NOIP  
+  N8N_ENCRYPTION_KEY: ${{ secrets.N8N_ENCRYPTION_KEY }} # Crie esse Secret no GitHub com uma chave de criptografia segura (pode ser gerada usando `openssl rand -base64 32`)
   
   # POSTGRES ENV VARIABLES
   #DB_TYPE: postgresdb

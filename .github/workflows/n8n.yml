@@ -25,7 +25,7 @@ env:
   
   # POSTGRES ENV VARIABLES
   DB_TYPE: postgresdb
-  DB_POSTGRESDB_HOST: 34.42.180.102
+  #DB_POSTGRESDB_HOST: 34.42.180.102
   DB_POSTGRESDB_PORT: 5432
   DB_POSTGRESDB_DATABASE: n8n
   DB_POSTGRESDB_USER: n8n
@@ -36,7 +36,8 @@ env:
 
   DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: false # Ajuste conforme necessário para o seu ambiente. "false" é útil para conexões SSL com certificados autoassinados, 
                                                  # mas não é recomendado para produção.
-  
+  DB_POSTGRESDB_HOST: /cloudsql/n8n-meus-ensinamentos:us-central1:postgres-cloudsql
+    
   #N8N_RUNNERS_GRANT_TOKEN_TTL: "240" # Tempo de vida do token de concessão para runners do n8n. Ajuste conforme necessário para o seu ambiente.
     
 jobs:
@@ -91,4 +92,5 @@ jobs:
             --allow-unauthenticated \
             --memory=2Gi \
             --min-instances=1 \
+            --add-cloudsql-instances=n8n-meus-ensinamentos:us-central1:postgres-cloudsql \
             --set-env-vars="N8N_TRUST_PROXY=${{ env.N8N_TRUST_PROXY }},GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }},N8N_HOST=${{ env.N8N_HOST }},N8N_PROTOCOL=${{ env.N8N_PROTOCOL }},WEBHOOK_URL=${{ env.WEBHOOK_URL }},DB_TYPE=${{ env.DB_TYPE }},DB_POSTGRESDB_HOST=${{ env.DB_POSTGRESDB_HOST }},DB_POSTGRESDB_PORT=${{ env.DB_POSTGRESDB_PORT }},DB_POSTGRESDB_DATABASE=${{ env.DB_POSTGRESDB_DATABASE }},DB_POSTGRESDB_USER=${{ env.DB_POSTGRESDB_USER }},DB_POSTGRESDB_PASSWORD=${{ secrets.DB_POSTGRESDB_PASSWORD }},N8N_ENCRYPTION_KEY=${{ secrets.N8N_ENCRYPTION_KEY }},DB_POSTGRESDB_SSL_ENABLED=${{ env.DB_POSTGRESDB_SSL_ENABLED }},DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=${{ env.DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED }}"

@@ -8,7 +8,6 @@ on:
 
 env:
   PROJECT_ID: n8n-meus-ensinamentos   # Substitua pelo ID do seu projeto no GCP
-  PORT: 5678                          # Porta onde a aplicação vai rodar dentro do container. 
                                       # que é a porta padrão de entrada do Cloud Run. 
   REGION: us-central1                 # Região do GCP (ex: São Paulo ou us-central1)
   SERVICE_NAME: n8n                   # Nome que o serviço terá no Cloud Run
@@ -22,9 +21,7 @@ env:
   #N8N_TRUST_PROXY: true 
   WEBHOOK_URL: https://n8n-574973424283.us-central1.run.app # CONFIGURADO NO NOIP
   
-  # DEFAULT N8N PORT
-  N8N_PORT: 5678 
-
+  
   # POSTGRES ENV VARIABLES
   DB_TYPE: postgresdb
   DB_POSTGRESDB_HOST: 34.42.180.102
@@ -80,11 +77,10 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.SERVICE_NAME }} \
-            --port=${{ env.PORT }} \
             --image="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:latest" \
             --region=${{ env.REGION }} \
             --platform=managed \
             --allow-unauthenticated \
             --memory=2Gi \
-            --set-env-vars="GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }},N8N_HOST=${{ env.N8N_HOST }},N8N_PROTOCOL=${{ env.N8N_PROTOCOL }},WEBHOOK_URL=${{ env.WEBHOOK_URL }},N8N_PORT=${{ env.N8N_PORT }},DB_TYPE=${{ env.DB_TYPE }},DB_POSTGRESDB_HOST=${{ env.DB_POSTGRESDB_HOST }},DB_POSTGRESDB_PORT=${{ env.DB_POSTGRESDB_PORT }},DB_POSTGRESDB_NAME=${{ env.DB_POSTGRESDB_NAME }},DB_POSTGRESDB_USER=${{ env.DB_POSTGRESDB_USER }},DB_POSTGRESDB_PASSWORD=${{ secrets.DB_POSTGRESDB_PASSWORD }},N8N_ENCRYPTION_KEY=${{ secrets.N8N_ENCRYPTION_KEY }}"
+            --set-env-vars="GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }},N8N_HOST=${{ env.N8N_HOST }},N8N_PROTOCOL=${{ env.N8N_PROTOCOL }},WEBHOOK_URL=${{ env.WEBHOOK_URL }},DB_TYPE=${{ env.DB_TYPE }},DB_POSTGRESDB_HOST=${{ env.DB_POSTGRESDB_HOST }},DB_POSTGRESDB_PORT=${{ env.DB_POSTGRESDB_PORT }},DB_POSTGRESDB_NAME=${{ env.DB_POSTGRESDB_NAME }},DB_POSTGRESDB_USER=${{ env.DB_POSTGRESDB_USER }},DB_POSTGRESDB_PASSWORD=${{ secrets.DB_POSTGRESDB_PASSWORD }},N8N_ENCRYPTION_KEY=${{ secrets.N8N_ENCRYPTION_KEY }}"
       

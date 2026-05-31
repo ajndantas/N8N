@@ -36,7 +36,7 @@ env:
   DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: "false" # Ajuste conforme necessário para o seu ambiente. "false" é útil para conexões SSL com certificados autoassinados, 
                                                  # mas não é recomendado para produção.
   
-  N8N_RUNNERS_GRANT_TOKEN_TTL: "120" # Tempo de vida do token de concessão para runners do n8n. Ajuste conforme necessário para o seu ambiente.
+  N8N_RUNNERS_GRANT_TOKEN_TTL: "240" # Tempo de vida do token de concessão para runners do n8n. Ajuste conforme necessário para o seu ambiente.
     
 jobs:
 

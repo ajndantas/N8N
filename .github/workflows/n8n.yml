@@ -15,26 +15,25 @@ env:
   
   # N8N ENV VARIABLES
   GENERIC_TIMEZONE: America/Sao_Paulo
-  N8N_HOST: https://n8n-574973424283.us-central1.run.app
+  N8N_HOST: n8n-574973424283.us-central1.run.app
   #N8N_HOST: antoniodantasn8n.ddns.net
   N8N_PROTOCOL: https
-  #N8N_TRUST_PROXY: true 
+  N8N_TRUST_PROXY: "true" 
   WEBHOOK_URL: https://n8n-574973424283.us-central1.run.app # CONFIGURADO NO NOIP  
   N8N_ENCRYPTION_KEY: ${{ secrets.N8N_ENCRYPTION_KEY }} # Crie esse Secret no GitHub com uma chave de criptografia segura (pode ser gerada usando `openssl rand -base64 32`)
   
   # POSTGRES ENV VARIABLES
-  #DB_TYPE: postgresdb
-  #DB_POSTGRESDB_HOST: 34.42.180.102
-  #DB_POSTGRESDB_PORT: 5432
-  #DB_POSTGRESDB_NAME: n8n
-  #DB_POSTGRESDB_USER: n8n
-  #DB_POSTGRESDB_PASSWORD: ${{ secrets.DB_POSTGRESDB_PASSWORD }} # Crie esse Secret no GitHub com a senha do seu banco de dados Postgres
-  #N8N_ENCRYPTION_KEY: ${{ secrets.N8N_ENCRYPTION_KEY }} # Crie esse Secret no GitHub com uma chave de criptografia segura (pode ser gerada usando `openssl rand -base64 32`)
-  #DB_POSTGRESDB_SSL_ENABLED: "true" # Habilita SSL para conexões com o banco de dados Postgres. 
+  DB_TYPE: postgresdb
+  DB_POSTGRESDB_HOST: 34.42.180.102
+  DB_POSTGRESDB_PORT: 5432
+  DB_POSTGRESDB_NAME: n8n
+  DB_POSTGRESDB_USER: n8n
+  DB_POSTGRESDB_PASSWORD: ${{ secrets.DB_POSTGRESDB_PASSWORD }} # Crie esse Secret no GitHub com a senha do seu banco de dados Postgres
+  DB_POSTGRESDB_SSL_ENABLED: "true" # Habilita SSL para conexões com o banco de dados Postgres. 
                                     # Ajuste conforme necessário para o seu ambiente. "true" é recomendado para produção, mas pode ser "false" 
                                     # para ambientes de desenvolvimento ou se o banco de dados não suportar SSL.
 
-  #DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: "false" # Ajuste conforme necessário para o seu ambiente. "false" é útil para conexões SSL com certificados autoassinados, 
+  DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: "false" # Ajuste conforme necessário para o seu ambiente. "false" é útil para conexões SSL com certificados autoassinados, 
                                                  # mas não é recomendado para produção.
   
   #N8N_RUNNERS_GRANT_TOKEN_TTL: "240" # Tempo de vida do token de concessão para runners do n8n. Ajuste conforme necessário para o seu ambiente.
@@ -89,7 +88,6 @@ jobs:
             --region=${{ env.REGION }} \
             --platform=managed \
             --allow-unauthenticated \
-            --memory=2Gi \
-            --set-env-vars="GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }},N8N_HOST=${{ env.N8N_HOST }},N8N_PROTOCOL=${{ env.N8N_PROTOCOL }},WEBHOOK_URL=${{ env.WEBHOOK_URL }},N8N_ENCRYPTION_KEY=${{ secrets.N8N_ENCRYPTION_KEY }}"
-        #--set-env-vars="N8N_RUNNERS_GRANT_TOKEN_TTL=${{ env.N8N_RUNNERS_GRANT_TOKEN_TTL }} ,GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }},N8N_HOST=${{ env.N8N_HOST }},N8N_PROTOCOL=${{ env.N8N_PROTOCOL }},WEBHOOK_URL=${{ env.WEBHOOK_URL }},DB_TYPE=${{ env.DB_TYPE }},DB_POSTGRESDB_HOST=${{ env.DB_POSTGRESDB_HOST }},DB_POSTGRESDB_PORT=${{ env.DB_POSTGRESDB_PORT }},DB_POSTGRESDB_NAME=${{ env.DB_POSTGRESDB_NAME }},DB_POSTGRESDB_USER=${{ env.DB_POSTGRESDB_USER }},DB_POSTGRESDB_PASSWORD=${{ secrets.DB_POSTGRESDB_PASSWORD }},N8N_ENCRYPTION_KEY=${{ secrets.N8N_ENCRYPTION_KEY }},DB_POSTGRESDB_SSL_ENABLED=${{ env.DB_POSTGRESDB_SSL_ENABLED }},DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=${{ env.DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED }}"
+            --memory=2Gi \        
+            --set-env-vars="N8N_TRUST_PROXY=${{ env.N8N_TRUST_PROXY }},GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }},N8N_HOST=${{ env.N8N_HOST }},N8N_PROTOCOL=${{ env.N8N_PROTOCOL }},WEBHOOK_URL=${{ env.WEBHOOK_URL }},DB_TYPE=${{ env.DB_TYPE }},DB_POSTGRESDB_HOST=${{ env.DB_POSTGRESDB_HOST }},DB_POSTGRESDB_PORT=${{ env.DB_POSTGRESDB_PORT }},DB_POSTGRESDB_NAME=${{ env.DB_POSTGRESDB_NAME }},DB_POSTGRESDB_USER=${{ env.DB_POSTGRESDB_USER }},DB_POSTGRESDB_PASSWORD=${{ secrets.DB_POSTGRESDB_PASSWORD }},N8N_ENCRYPTION_KEY=${{ secrets.N8N_ENCRYPTION_KEY }},DB_POSTGRESDB_SSL_ENABLED=${{ env.DB_POSTGRESDB_SSL_ENABLED }},DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=${{ env.DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED }}"
             

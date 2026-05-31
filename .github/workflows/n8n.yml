@@ -18,8 +18,8 @@ env:
   N8N_HOST: n8n-574973424283.us-central1.run.app
   #N8N_HOST: antoniodantasn8n.ddns.net
   N8N_PROTOCOL: https
-  N8N_TRUST_PROXY: true 
-  N8N_SECURE_COOKIE: true 
+  N8N_TRUST_PROXY: true # Habilita a confiança em proxies reversos, o que é importante para o correto funcionamento do n8n quando implantado em ambientes como o Cloud Run, 
+                        # que atuam como proxies reversos.
   WEBHOOK_URL: https://n8n-574973424283.us-central1.run.app # CONFIGURADO NO NOIP  
   N8N_ENCRYPTION_KEY: ${{ secrets.N8N_ENCRYPTION_KEY }} # Crie esse Secret no GitHub com uma chave de criptografia segura (pode ser gerada usando `openssl rand -base64 32`)
   

@@ -71,7 +71,20 @@ jobs:
           #TAG=$(date +%Y%m%d%H%M%S)
           TAG=latest
           
-          docker build --build-arg GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }} --build-arg N8N_HOST=${{ env.N8N_HOST }} --build-arg N8N_PROTOCOL=${{ env.N8N_PROTOCOL }} --build-arg WEBHOOK_URL=${{ env.WEBHOOK_URL }} --build-arg N8N_PORT=${{ env.N8N_PORT }} -t $IMAGE_ID:$TAG . # PEGA O DOCKERFILE AQUI
+          docker build --build-arg GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }} \
+          --build-arg N8N_HOST=${{ env.N8N_HOST }} \
+          --build-arg N8N_PROTOCOL=${{ env.N8N_PROTOCOL }} \
+          --build-arg WEBHOOK_URL=${{ env.WEBHOOK_URL }} \
+          --build-arg N8N_PORT=${{ env.N8N_PORT }} \
+          --build-arg DB_TYPE=${{ env.DB_TYPE }} \
+          --build-arg DB_POSTGRESDB_HOST=${{ env.DB_POSTGRESDB_HOST }} \
+          --build-arg DB_POSTGRESDB_PORT=${{ env.DB_POSTGRESDB_PORT }} \
+          --build-arg DB_POSTGRESDB_NAME=${{ env.DB_POSTGRESDB_NAME }} \
+          --build-arg DB_POSTGRESDB_USER=${{ env.DB_POSTGRESDB_USER }} \
+          --build-arg DB_POSTGRESDB_PASSWORD=${{ secrets.DB_POSTGRESDB_PASSWORD }} \
+          --build-arg N8N_ENCRYPTION_KEY=${{ secrets.N8N_ENCRYPTION_KEY }} \
+          -t $IMAGE_ID:$TAG . # PEGA O DOCKERFILE AQUI
+          
           docker push $IMAGE_ID:$TAG 
 
       # 5. Deploy da imagem Docker para o Cloud Run

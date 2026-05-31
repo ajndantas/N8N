@@ -7,7 +7,8 @@ on:
       - '.github/workflows/n8n.yml'        
 
 env:
-  PROJECT_ID: n8n-meus-ensinamentos   # Substitua pelo ID do seu projeto no GCP                                      
+  PROJECT_ID: n8n-meus-ensinamentos   # Substitua pelo ID do seu projeto no GCP 
+  PORT: 5678                          # Porta padrão do n8n                                     
   REGION: us-central1                 # Região do GCP (ex: São Paulo ou us-central1)
   SERVICE_NAME: n8n                   # Nome que o serviço terá no Cloud Run
   REPO_NAME: n8n                      # Nome do seu repositório no Artifact Registry. Deve ser criado previamente no GCP.
@@ -76,6 +77,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --port=${{ env.PORT }} \
             --image="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:latest" \
             --region=${{ env.REGION }} \
             --platform=managed \

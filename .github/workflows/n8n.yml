@@ -24,6 +24,15 @@ env:
   
   # DEFAULT N8N PORT
   N8N_PORT: 5678 
+
+  # POSTGRES ENV VARIABLES
+  DB_TYPE: postgres
+  DB_POSTGRESDB_HOST: 34.42.180.102
+  DB_POSTGRESDB_PORT: 5432
+  DB_POSTGRESDB_NAME: n8n
+  DB_POSTGRESDB_USER: n8n
+  DB_POSTGRESDB_PASSWORD: ${{ secrets.DB_POSTGRESDB_PASSWORD }} # Crie esse Secret no GitHub com a senha do seu banco de dados Postgres
+  N8N_ENCRYPTION_KEY: ${{ secrets.N8N_ENCRYPTION_KEY }} # Crie esse Secret no GitHub com uma chave de criptografia segura (pode ser gerada usando `openssl rand -base64 32`)
     
 jobs:
 
@@ -74,6 +83,6 @@ jobs:
             --region=${{ env.REGION }} \
             --platform=managed \
             --allow-unauthenticated \
-            --set-env-vars=GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }},N8N_HOST=${{ env.N8N_HOST }},N8N_PROTOCOL=${{ env.N8N_PROTOCOL }},WEBHOOK_URL=${{ env.WEBHOOK_URL }},N8N_PORT=${{ env.N8N_PORT }} \
+            --set-env-vars=GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }},N8N_HOST=${{ env.N8N_HOST }},N8N_PROTOCOL=${{ env.N8N_PROTOCOL }},WEBHOOK_URL=${{ env.WEBHOOK_URL }},N8N_PORT=${{ env.N8N_PORT }},DB_TYPE=${{ env.DB_TYPE }},DB_POSTGRESDB_HOST=${{ env.DB_POSTGRESDB_HOST }},DB_POSTGRESDB_PORT=${{ env.DB_POSTGRESDB_PORT }},DB_POSTGRESDB_NAME=${{ env.DB_POSTGRESDB_NAME }},DB_POSTGRESDB_USER=${{ env.DB_POSTGRESDB_USER }},DB_POSTGRESDB_PASSWORD=${{ secrets.DB_POSTGRESDB_PASSWORD }},N8N_ENCRYPTION_KEY=${{ secrets.N8N_ENCRYPTION_KEY }} \
             --memory=2Gi  
       

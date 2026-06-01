@@ -39,6 +39,7 @@ env:
   DB_POSTGRESDB_POOL_SIZE: 2 # Tamanho do pool de conexões para o banco de dados. Ajuste conforme necessário, dependendo da carga esperada e dos limites do seu banco de dados.
   DB_POSTGRESDB_KEEPALIVE: true
   DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY: 0
+  NODE_OPTIONS: "--dns-result-order=ipv4first"
 
 
 jobs:
@@ -117,4 +118,5 @@ jobs:
             --set-env-vars=DB_POSTGRESDB_PASSWORD='${{ secrets.DB_POSTGRESDB_PASSWORD }}' \
             --set-env-vars=DB_POSTGRESDB_POOL_SIZE=${{ env.DB_POSTGRESDB_POOL_SIZE }} \
             --set-env-vars=DB_POSTGRESDB_KEEPALIVE=${{ env.DB_POSTGRESDB_KEEPALIVE }} \
-            --set-env-vars=DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY=${{ env.DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY }}
+            --set-env-vars=DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY=${{ env.DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY }} \
+            --set-env-vars=NODE_OPTIONS=${{ env.NODE_OPTIONS }}

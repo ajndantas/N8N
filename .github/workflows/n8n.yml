@@ -35,11 +35,12 @@ env:
   DB_POSTGRESDB_SCHEMA: public
   DB_POSTGRESDB_SSL_ENABLED: true # Configuração para SSL, ajuste conforme necessário. Se estiver usando o Cloud SQL, geralmente não é necessário habilitar SSL.
   DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: false # Configuração para aceitar certificados autoassinados, caso esteja usando SSL. Ajuste conforme necessário.
-  N8N_RUNNERS_GRANT_TOKEN_TTL: 120 # Tempo de vida do token de concessão para runners, em segundos. Ajuste conforme necessário.
+  N8N_RUNNERS_GRANT_TOKEN_TTL: 240 # Tempo de vida do token de concessão para runners, em segundos. Ajuste conforme necessário.
   DB_POSTGRESDB_POOL_SIZE: 2 # Tamanho do pool de conexões para o banco de dados. Ajuste conforme necessário, dependendo da carga esperada e dos limites do seu banco de dados.
   DB_POSTGRESDB_KEEPALIVE: true
   DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY: 0
   NODE_OPTIONS: "--dns-result-order=ipv4first"
+  DB_POSTGRESDB_IDLE_TIMEOUT: 30000
 
 
 jobs:
@@ -119,4 +120,5 @@ jobs:
             --set-env-vars=DB_POSTGRESDB_POOL_SIZE=${{ env.DB_POSTGRESDB_POOL_SIZE }} \
             --set-env-vars=DB_POSTGRESDB_KEEPALIVE=${{ env.DB_POSTGRESDB_KEEPALIVE }} \
             --set-env-vars=DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY=${{ env.DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY }} \
-            --set-env-vars=NODE_OPTIONS=${{ env.NODE_OPTIONS }}
+            --set-env-vars=NODE_OPTIONS=${{ env.NODE_OPTIONS }} \
+            --set-env-vars=DB_POSTGRESDB_IDLE_TIMEOUT=${{ env.DB_POSTGRESDB_IDLE_TIMEOUT }}

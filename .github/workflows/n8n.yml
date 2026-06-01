@@ -83,6 +83,7 @@ jobs:
       # --add-cloudsql-instances: Adiciona a instância do Cloud SQL para que o Cloud Run possa se conectar ao banco de dados Postgres hospedado no Cloud SQL. 
       # Substitua "postgres-cloudsql" pelo nome da sua instância do Cloud SQL.
       # 5. Deploy da imagem Docker para o Cloud Run
+      # 5. Deploy da imagem Docker para o Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.SERVICE_NAME }} \
@@ -93,20 +94,21 @@ jobs:
             --allow-unauthenticated \
             --memory=2Gi \
             --min-instances=1 \
+            --timeout=300 \
             --add-cloudsql-instances="${{ env.PROJECT_ID }}:${{ env.REGION }}:postgres-cloudsql" \
-            --set-env-vars=DB_TYPE=${{ env.DB_TYPE }} \
-            --set-env-vars=N8N_ENCRYPTION_KEY="${{ secrets.N8N_ENCRYPTION_KEY }}" \
-            --set-env-vars=DB_POSTGRESDB_SCHEMA=${{ env.DB_POSTGRESDB_SCHEMA }} \
-            --set-env-vars=DB_POSTGRESDB_SSL_ENABLED=${{ env.DB_POSTGRESDB_SSL_ENABLED }} \
-            --set-env-vars=DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=${{ env.DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED }} \
-            --set-env-vars=DB_POSTGRESDB_CONNECTION_TIMEOUT=${{ env.DB_POSTGRESDB_CONNECTION_TIMEOUT }} \
-            --set-env-vars=N8N_TRUST_PROXY=${{ env.N8N_TRUST_PROXY }} \
-            --set-env-vars=GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }} \
-            --set-env-vars=N8N_HOST=${{ env.N8N_HOST }} \
-            --set-env-vars=N8N_PROTOCOL=${{ env.N8N_PROTOCOL }} \
-            --set-env-vars=WEBHOOK_URL=${{ env.WEBHOOK_URL }} \
-            --set-env-vars=DB_POSTGRESDB_HOST=${{ env.DB_POSTGRESDB_HOST }} \
-            --set-env-vars=DB_POSTGRESDB_PORT=${{ env.DB_POSTGRESDB_PORT }} \
-            --set-env-vars=DB_POSTGRESDB_DATABASE=${{ env.DB_POSTGRESDB_DATABASE }} \
-            --set-env-vars=DB_POSTGRESDB_USER=${{ env.DB_POSTGRESDB_USER }} \
-            --set-env-vars=DB_POSTGRESDB_PASSWORD="${{ secrets.DB_POSTGRESDB_PASSWORD }}"
+            --set-env-vars="DB_TYPE=${{ env.DB_TYPE }}" \
+            --set-env-vars="N8N_ENCRYPTION_KEY=${{ secrets.N8N_ENCRYPTION_KEY }}" \
+            --set-env-vars="DB_POSTGRESDB_SCHEMA=${{ env.DB_POSTGRESDB_SCHEMA }}" \
+            --set-env-vars="DB_POSTGRESDB_SSL_ENABLED=${{ env.DB_POSTGRESDB_SSL_ENABLED }}" \
+            --set-env-vars="DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=${{ env.DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED }}" \
+            --set-env-vars="DB_POSTGRESDB_CONNECTION_TIMEOUT=${{ env.DB_POSTGRESDB_CONNECTION_TIMEOUT }}" \
+            --set-env-vars="N8N_TRUST_PROXY=${{ env.N8N_TRUST_PROXY }}" \
+            --set-env-vars="GENERIC_TIMEZONE=${{ env.GENERIC_TIMEZONE }}" \
+            --set-env-vars="N8N_HOST=${{ env.N8N_HOST }}" \
+            --set-env-vars="N8N_PROTOCOL=${{ env.N8N_PROTOCOL }}" \
+            --set-env-vars="WEBHOOK_URL=${{ env.WEBHOOK_URL }}" \
+            --set-env-vars="DB_POSTGRESDB_HOST=${{ env.DB_POSTGRESDB_HOST }}" \
+            --set-env-vars="DB_POSTGRESDB_PORT=${{ env.DB_POSTGRESDB_PORT }}" \
+            --set-env-vars="DB_POSTGRESDB_DATABASE=${{ env.DB_POSTGRESDB_DATABASE }}" \
+            --set-env-vars="DB_POSTGRESDB_USER=${{ env.DB_POSTGRESDB_USER }}" \
+            --set-env-vars="DB_POSTGRESDB_PASSWORD=${{ secrets.DB_POSTGRESDB_PASSWORD }}"

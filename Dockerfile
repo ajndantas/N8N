@@ -1,2 +1,5 @@
 # Use uma imagem Python oficial e leve como base
 FROM n8nio/n8n:latest
+
+ENV DB_POSTGRESDB_SSL_ENABLED=true
+ENV DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=false

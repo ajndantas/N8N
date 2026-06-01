@@ -33,10 +33,8 @@ env:
   DB_POSTGRESDB_PASSWORD: ${{ secrets.DB_POSTGRESDB_PASSWORD }} # Crie esse Secret no GitHub com a senha do seu banco de dados Postgres
   DB_POSTGRESDB_CONNECTION_TIMEOUT: 60000
   DB_POSTGRESDB_SCHEMA: public
-  DB_POSTGRESDB_SSL_ENABLED: false # Configuração para SSL, ajuste conforme necessário. Se estiver usando o Cloud SQL, geralmente não é necessário habilitar SSL.
-  DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: false # Configuração para aceitar certificados autoassinados, caso esteja usando SSL. Ajuste conforme necessário.
-  PGSSLMODE: disable
-  DB_POSTGRESDB_SSL: false
+  DB_POSTGRESDB_SSL_ENABLED: true # Configuração para SSL, ajuste conforme necessário. Se estiver usando o Cloud SQL, geralmente não é necessário habilitar SSL.
+  DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: true # Configuração para aceitar certificados autoassinados, caso esteja usando SSL. Ajuste conforme necessário.
 
 
 jobs:
@@ -101,8 +99,6 @@ jobs:
             --set-env-vars=N8N_ENCRYPTION_KEY='${{ secrets.N8N_ENCRYPTION_KEY }}' \
             --set-env-vars=DB_POSTGRESDB_SCHEMA=${{ env.DB_POSTGRESDB_SCHEMA }} \
             --set-env-vars=DB_POSTGRESDB_SSL_ENABLED=${{ env.DB_POSTGRESDB_SSL_ENABLED }} \
-            --set-env-vars=PGSSLMODE=${{ env.PGSSLMODE }} \
-            --set-env-vars=DB_POSTGRESDB_SSL=${{ env.DB_POSTGRESDB_SSL }} \
             --set-env-vars=DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=${{ env.DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED }} \
             --set-env-vars=DB_POSTGRESDB_CONNECTION_TIMEOUT=${{ env.DB_POSTGRESDB_CONNECTION_TIMEOUT }} \
             --set-env-vars=N8N_TRUST_PROXY=${{ env.N8N_TRUST_PROXY }} \

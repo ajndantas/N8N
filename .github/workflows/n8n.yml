@@ -25,8 +25,8 @@ env:
   
   # POSTGRES ENV VARIABLES
   DB_TYPE: postgresdb
-  #DB_POSTGRESDB_HOST: 34.42.180.102
-  DB_POSTGRESDB_HOST: /cloudsql/n8n-meus-ensinamentos:us-central1:postgres-cloudsql
+  DB_POSTGRESDB_HOST: 34.42.180.102
+  #DB_POSTGRESDB_HOST: /cloudsql/n8n-meus-ensinamentos:us-central1:postgres-cloudsql
   DB_POSTGRESDB_PORT: 5432
   DB_POSTGRESDB_DATABASE: n8n
   DB_POSTGRESDB_USER: n8n
@@ -94,7 +94,6 @@ jobs:
             --memory=2Gi \
             --min-instances=1 \
             --timeout=300 \
-            --add-cloudsql-instances="${{ env.PROJECT_ID }}:${{ env.REGION }}:postgres-cloudsql" \
             --set-env-vars=DB_TYPE=${{ env.DB_TYPE }} \
             --set-env-vars=N8N_ENCRYPTION_KEY='${{ secrets.N8N_ENCRYPTION_KEY }}' \
             --set-env-vars=DB_POSTGRESDB_SCHEMA=${{ env.DB_POSTGRESDB_SCHEMA }} \

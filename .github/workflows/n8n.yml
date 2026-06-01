@@ -35,6 +35,7 @@ env:
   DB_POSTGRESDB_SCHEMA: public
   DB_POSTGRESDB_SSL_ENABLED: true # Configuração para SSL, ajuste conforme necessário. Se estiver usando o Cloud SQL, geralmente não é necessário habilitar SSL.
   DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: false # Configuração para aceitar certificados autoassinados, caso esteja usando SSL. Ajuste conforme necessário.
+  N8N_RUNNERS_GRANT_TOKEN_TTL: 120 # Tempo de vida do token de concessão para runners, em segundos. Ajuste conforme necessário.
 
 
 jobs:
@@ -96,6 +97,7 @@ jobs:
             --timeout=300 \
             --set-env-vars=DB_TYPE=${{ env.DB_TYPE }} \
             --set-env-vars=N8N_ENCRYPTION_KEY='${{ secrets.N8N_ENCRYPTION_KEY }}' \
+            --set-env-vars=N8N_RUNNERS_GRANT_TOKEN_TTL=${{ env.N8N_RUNNERS_GRANT_TOKEN_TTL }} \
             --set-env-vars=DB_POSTGRESDB_SCHEMA=${{ env.DB_POSTGRESDB_SCHEMA }} \
             --set-env-vars=DB_POSTGRESDB_SSL_ENABLED=${{ env.DB_POSTGRESDB_SSL_ENABLED }} \
             --set-env-vars=DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=${{ env.DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED }} \

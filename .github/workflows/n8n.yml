@@ -37,6 +37,8 @@ env:
   DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED: false # Configuração para aceitar certificados autoassinados, caso esteja usando SSL. Ajuste conforme necessário.
   N8N_RUNNERS_GRANT_TOKEN_TTL: 120 # Tempo de vida do token de concessão para runners, em segundos. Ajuste conforme necessário.
   DB_POSTGRESDB_POOL_SIZE: 2 # Tamanho do pool de conexões para o banco de dados. Ajuste conforme necessário, dependendo da carga esperada e dos limites do seu banco de dados.
+  DB_POSTGRESDB_KEEPALIVE: true
+  DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY: 0
 
 
 jobs:
@@ -113,4 +115,6 @@ jobs:
             --set-env-vars=DB_POSTGRESDB_DATABASE=${{ env.DB_POSTGRESDB_DATABASE }} \
             --set-env-vars=DB_POSTGRESDB_USER=${{ env.DB_POSTGRESDB_USER }} \
             --set-env-vars=DB_POSTGRESDB_PASSWORD='${{ secrets.DB_POSTGRESDB_PASSWORD }}' \
-            --set-env-vars=DB_POSTGRESDB_POOL_SIZE=${{ env.DB_POSTGRESDB_POOL_SIZE }}
+            --set-env-vars=DB_POSTGRESDB_POOL_SIZE=${{ env.DB_POSTGRESDB_POOL_SIZE }} \
+            --set-env-vars=DB_POSTGRESDB_KEEPALIVE=${{ env.DB_POSTGRESDB_KEEPALIVE }} \
+            --set-env-vars=DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY=${{ DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY }}

@@ -25,8 +25,8 @@ env:
   
   # POSTGRES ENV VARIABLES
   DB_TYPE: postgresdb
-  DB_POSTGRESDB_HOST: 34.42.180.102
-  #DB_POSTGRESDB_HOST: /cloudsql/n8n-meus-ensinamentos:us-central1:postgres-cloudsql
+  #B_POSTGRESDB_HOST: 34.42.180.102
+  DB_POSTGRESDB_HOST: /cloudsql/n8n-meus-ensinamentos:us-central1:postgres-cloudsql
   DB_POSTGRESDB_PORT: 5432
   DB_POSTGRESDB_DATABASE: n8n
   DB_POSTGRESDB_USER: n8n
@@ -40,7 +40,7 @@ env:
   DB_POSTGRESDB_KEEPALIVE: true
   DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY: 0
   NODE_OPTIONS: "--dns-result-order=ipv4first"
-  DB_POSTGRESDB_IDLE_TIMEOUT: 30000
+  DB_POSTGRESDB_IDLE_CONNECTION_TIMEOUT: 30000
 
 
 jobs:
@@ -100,6 +100,7 @@ jobs:
             --memory=2Gi \
             --min-instances=1 \
             --timeout=300 \
+            --add-cloudsql-instances=n8n-meus-ensinamentos:us-central1:postgres-cloudsql \
             --set-env-vars=DB_TYPE=${{ env.DB_TYPE }} \
             --set-env-vars=N8N_ENCRYPTION_KEY='${{ secrets.N8N_ENCRYPTION_KEY }}' \
             --set-env-vars=N8N_RUNNERS_GRANT_TOKEN_TTL=${{ env.N8N_RUNNERS_GRANT_TOKEN_TTL }} \
@@ -121,4 +122,4 @@ jobs:
             --set-env-vars=DB_POSTGRESDB_KEEPALIVE=${{ env.DB_POSTGRESDB_KEEPALIVE }} \
             --set-env-vars=DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY=${{ env.DB_POSTGRESDB_KEEPALIVE_INITIAL_DELAY }} \
             --set-env-vars=NODE_OPTIONS=${{ env.NODE_OPTIONS }} \
-            --set-env-vars=DB_POSTGRESDB_IDLE_TIMEOUT=${{ env.DB_POSTGRESDB_IDLE_TIMEOUT }}
+            --set-env-vars=DB_POSTGRESDB_IDLE_CONNECTION_TIMEOUT=${{ env.DB_POSTGRESDB_IDLE_CONNECTION_TIMEOUT }}

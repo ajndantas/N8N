@@ -1,11 +1,10 @@
 import json
 from os import getenv
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, Header, HTTPException, Depends
 import subprocess
 from pydantic import BaseModel
 from typing import List
-from fastapi import Header, HTTPException, Depends
 
 # Este script é um aplicativo FastAPI que expõe um endpoint POST em "/urls".
 #
@@ -30,8 +29,14 @@ def verify_api_key(x_api_key: str = Header(...)):
 
     if x_api_key != getenv("API_KEY"):
         print("API_KEY fornecida:", x_api_key)
-        raise HTTPException(status_code=401, detail=f"Unauthorized - API_key = {api_key}")
-    
+        # HTTPException é uma classe do FastAPI que representa uma resposta de erro HTTP.
+        #
+        # Quais são os parâmetros obrigatórios de HTTPException ?
+        #
+        # status_code: O código de status HTTP a ser retornado (por exemplo, 401 para Unauthorized).
+        # detail: Uma mensagem de detalhe que descreve o motivo do erro.
+        raise HTTPException(status_code=401, detail=f"Unauthorized - API_key = {api_key}") 
+       
 
 @app.post("/urls")
 def run_script(input: Input, api_key: str = Depends(verify_api_key)): 
